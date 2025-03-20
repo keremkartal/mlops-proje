@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+
+# Sanal ortam
+venv/
+
+# DVC (takip etmeyen dosyalar)
+*.dvc
+*.pkl
+
+# MLflow ve DVC cache'leri
+mlruns/
+data/
+
+# Log dosyaları
+*.log
+
+# Docker
+*.dockerignore
+
+# İşletim sistemi gereksiz dosyalar
+.DS_Store
+Thumbs.db
+
