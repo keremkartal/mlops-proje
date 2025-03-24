@@ -35,8 +35,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: Python Kurulumu
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.11"
+          
+      - name: Bağımlılıkları Yükle
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          
       - name: Modeli Oluştur
-        run: python train.py  # Önce modeli oluştur
-        
+        run: |
+          python train.py
+          ls -la  # Oluşan dosyaları kontrol
+          
       - name: Docker Build
-        run: docker build -t ml-api .
+        run: |
+          docker build -t ml-api .
