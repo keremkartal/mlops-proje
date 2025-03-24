@@ -20,22 +20,15 @@ jobs:
 
       - name: Bağımlılıkları Yükle
         run: |
-          python -m pip install --upgrade pip
-          pip install mlflow fastapi uvicorn joblib scikit-learn pandas pytest
-          # DVC kaldırıldı
-
-      - name: Veri Dosyasını Kontrol Et
-        run: |
-          if [ ! -f data.csv ]; then
-            echo "Hata: data.csv bulunamadı! Lütfen dosyayı repo'ya ekleyin."
-            exit 1
-          fi
+          pip install -r requirements.txt
 
       - name: Model Eğit
         run: |
           python train.py
 
-     
+      - name: Testleri Çalıştır
+        run: |
+          pytest --maxfail=1 --disable-warnings -q
 
   docker-build:
     needs: build-and-test
@@ -44,11 +37,11 @@ jobs:
       - name: Kodu Klonla
         uses: actions/checkout@v2
 
-      - name: Docker Kurulumu
+      - name: Docker Bağımlılıklarını Yükle
         run: |
           sudo apt-get update
-          sudo apt-get install -y docker.io
-
-      - name: Docker Build
-        run: |
-          docker build -t ml-api .
+          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+          sudo apt-get update
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
