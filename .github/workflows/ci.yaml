@@ -13,12 +13,7 @@ jobs:
       - name: Kodu Klonla
         uses: actions/checkout@v2
         with:
-          submodules: true  # DVC için gerekiyor
-
-      - name: DVC Setup
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y dvc
+          submodules: true  # DVC için gerekli
 
       - name: Python Kurulumu
         uses: actions/setup-python@v2
@@ -27,8 +22,13 @@ jobs:
 
       - name: Bağımlılıkları Yükle
         run: |
-          pip install --upgrade pip
-          pip install dvc mlflow fastapi uvicorn joblib scikit-learn pandas pytest
+          python -m pip install --upgrade pip
+          pip install dvc==3.50.0 mlflow fastapi uvicorn joblib scikit-learn pandas pytest
+          # DVC'nin spesifik versiyonunu belirttik (Ubuntu 24.04 uyumluluğu için)
+
+      - name: DVC Kurulum Doğrulama
+        run: |
+          dvc --version
 
       - name: DVC Pull (Verileri İndir)
         run: |
@@ -48,6 +48,11 @@ jobs:
     steps:
       - name: Kodu Klonla
         uses: actions/checkout@v2
+
+      - name: Docker Kurulumu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
       - name: Docker Build
         run: |
