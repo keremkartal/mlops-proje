@@ -17,15 +17,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-      
-      - name: Kullanılabilir Kütüphane Sürümlerini Kontrol Et
-        run: |
-          while read package; do
-            pkg_name=$(echo $package | cut -d"=" -f1)
-            echo "Kontrol Ediliyor: $pkg_name"
-            pip install "$pkg_name==" 2>&1 | grep "from versions"
-          done < requirements.txt
 
+      - name: Bağımlılıkları Yükle
+        run: |
+          pip install -r requirements.txt
 
       - name: Model Eğit
         run: |
@@ -42,11 +37,6 @@ jobs:
       - name: Kodu Klonla
         uses: actions/checkout@v2
 
-      - name: Docker Bağımlılıklarını Yükle
+      - name: Docker Build
         run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+          docker build -t ml-api .
