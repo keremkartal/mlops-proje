@@ -17,10 +17,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-
-      - name: Bağımlılıkları Yükle
+      
+      - name: Kullanılabilir Kütüphane Sürümlerini Kontrol Et
         run: |
-          pip install -r requirements.txt
+          while read package; do
+            pkg_name=$(echo $package | cut -d"=" -f1)
+            echo "Kontrol Ediliyor: $pkg_name"
+            pip install "$pkg_name==" 2>&1 | grep "from versions"
+          done < requirements.txt
+
 
       - name: Model Eğit
         run: |
