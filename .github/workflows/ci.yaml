@@ -28,15 +28,15 @@ jobs:
 
       # - name: Testleri Çalıştır
       #   run: |
-      #     pytest --maxfail=1 --disable-warnings -q
-
+        #     pytest --maxfail=1 --disable-warnings -q
   docker-build:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      - name: Kodu Klonla
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
+      
+      - name: Modeli Oluştur
+        run: python train.py  # Önce modeli oluştur
+        
       - name: Docker Build
-        run: |
-          docker build -t ml-api .
+        run: docker build -t ml-api .
