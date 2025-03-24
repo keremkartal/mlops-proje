@@ -1,1 +1,22 @@
-/data.csv
+# Veri ve Model
+data.csv
+model.pkl
+
+# DVC
+.dvc/
+
+# Sanal Ortam
+venv/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# MLflow
+mlruns/
+
+# IDE
+.idea/
+.vscode/
