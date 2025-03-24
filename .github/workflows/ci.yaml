@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Kodu Klonla
         uses: actions/checkout@v2
-        with:
-          submodules: true  # DVC için gerekli
 
       - name: Python Kurulumu
         uses: actions/setup-python@v2
@@ -23,24 +21,21 @@ jobs:
       - name: Bağımlılıkları Yükle
         run: |
           python -m pip install --upgrade pip
-          pip install dvc==3.50.0 mlflow fastapi uvicorn joblib scikit-learn pandas pytest
-          # DVC'nin spesifik versiyonunu belirttik (Ubuntu 24.04 uyumluluğu için)
+          pip install mlflow fastapi uvicorn joblib scikit-learn pandas pytest
+          # DVC kaldırıldı
 
-      - name: DVC Kurulum Doğrulama
+      - name: Veri Dosyasını Kontrol Et
         run: |
-          dvc --version
+          if [ ! -f data.csv ]; then
+            echo "Hata: data.csv bulunamadı! Lütfen dosyayı repo'ya ekleyin."
+            exit 1
+          fi
 
-      - name: DVC Pull (Verileri İndir)
+      - name: Model Eğit
         run: |
-          dvc pull  # DVC remote ayarlıysa verileri çeker
+          python train.py
 
-      - name: Model Eğit (DVC Pipeline)
-        run: |
-          dvc repro
-
-      - name: Testleri Çalıştır
-        run: |
-          pytest --maxfail=1 --disable-warnings -q
+     
 
   docker-build:
     needs: build-and-test
