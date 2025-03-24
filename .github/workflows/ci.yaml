@@ -44,7 +44,12 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          
+      
+      - name: Dosya Kontrolü
+        run: |
+          ls -la
+          [ -f data.csv ] || { echo "HATA: data.csv bulunamadı!"; exit 1; }
+
       - name: Modeli Oluştur
         run: |
           python train.py

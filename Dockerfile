@@ -2,18 +2,19 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+# Önce tüm statik dosyaları kopyala
+COPY requirements.txt data.csv ./
 
-
-COPY requirements.txt .
-RUN pip install --upgrade pip && \
+# Bağımlılıkları kur
+RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY app.py .
-COPY train.py .  
+# Uygulama kodunu kopyala
+COPY *.py ./
 
-# Model dosyasını oluşturmak için train.py'yi çalıştır
+# Modeli eğit
 RUN python train.py
 
+# Port ve çalıştırma ayarları
 EXPOSE 8000
-
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
