@@ -1,0 +1,11 @@
+2025-04-10 16:02:01,560 - INFO - Anasayfaya istek geldi, form sayfasına yönlendiriliyor.
+2025-04-10 16:02:01,589 - INFO - Form sayfası görüntülendi.
+2025-04-10 16:02:06,808 - INFO - Formdan gelen veri: [[554.0, 5454.0, 554.0]], tahmin: 600.0962676503148
+2025-04-10 16:03:45,960 - INFO - Formdan gelen veri: [[7878.0, 7787.0, 8787.0]], tahmin: 1259.9339012701703
+2025-04-10 16:05:53,921 - root - INFO - app:65 - Anasayfaya istek geldi; kullanıcı form sayfasına yönlendiriliyor.
+2025-04-10 16:05:53,922 - uvicorn.access - INFO - h11_impl:473 - 127.0.0.1:52072 - "GET / HTTP/1.1" 307
+2025-04-10 16:05:53,939 - root - INFO - app:78 - Form sayfası görüntülendi.
+2025-04-10 16:05:53,947 - uvicorn.access - INFO - h11_impl:473 - 127.0.0.1:52072 - "GET /form HTTP/1.1" 200
+2025-04-10 16:06:14,332 - root - INFO - app:91 - Formdan gelen tahmin sonucu: 30534.42014398387
+2025-04-10 16:06:14,333 - uvicorn.access - INFO - h11_impl:473 - 127.0.0.1:52076 - "POST /predict-form HTTP/1.1" 200
+2025-04-10 16:09:32,040 - INFO - Formdan gelen veri: [[545.0, 545.0, 5454.0]], tahmin: 102.4455670689425
