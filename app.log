@@ -9,3 +9,8 @@
 2025-04-10 16:06:14,332 - root - INFO - app:91 - Formdan gelen tahmin sonucu: 30534.42014398387
 2025-04-10 16:06:14,333 - uvicorn.access - INFO - h11_impl:473 - 127.0.0.1:52076 - "POST /predict-form HTTP/1.1" 200
 2025-04-10 16:09:32,040 - INFO - Formdan gelen veri: [[545.0, 545.0, 5454.0]], tahmin: 102.4455670689425
+2025-05-11 19:08:42,006 - ERROR - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
