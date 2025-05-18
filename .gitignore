@@ -17,3 +17,4 @@ mlruns/
 # IDE
 .idea/
 .vscode/
+/model.pkl
