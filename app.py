@@ -7,11 +7,11 @@ import joblib
 
 # Logging yapılandırması
 logging.basicConfig(
-    level=logging.INFO,                             # INFO ve üzeri log seviyeleri kaydedilir
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Log mesajlarının formatı
+    level=logging.INFO,                             
+    format='%(asctime)s - %(levelname)s - %(message)s', 
     handlers=[
-        logging.FileHandler("app.log"),            # Loglar app.log dosyasına yazılır
-        logging.StreamHandler()                    # Loglar terminale de yazdırılır
+        logging.FileHandler("app.log"),            
+        logging.StreamHandler()                   
     ]
 )
 
@@ -30,13 +30,11 @@ class Features(BaseModel):
     Radio: float
     Newspaper: float
 
-# Ana endpoint → doğrudan form ekranına yönlendir
 @app.get("/")
 def redirect_to_form():
     logging.info("Anasayfaya istek geldi, form sayfasına yönlendiriliyor.")
     return RedirectResponse(url="/form")
 
-# API için JSON tabanlı tahmin (programatik kullanım için)
 @app.post("/predict")
 def predict(features: Features):
     data = [[features.TV, features.Radio, features.Newspaper]]

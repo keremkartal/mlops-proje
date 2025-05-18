@@ -27,7 +27,6 @@ model.fit(X_train, y_train)
 # Tahmin yap
 predictions = model.predict(X_test)
 
-# RMSE’yi manuel olarak hesapla (burada squared parametresi yok)
 rmse = np.sqrt(mean_squared_error(y_test, predictions))
 
 # MLflow’a metrik kaydet
