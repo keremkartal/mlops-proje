@@ -24,8 +24,8 @@ Reklam harcamalarına dayalı satış tahmini yapan Lineer Regresyon modelinin M
 
 ```bash
 # 1. Repoyu klonla
-git clone https://github.com/<kullanici>/<repo>.git
-cd <repo>
+git clonehttps://github.com/keremkartal/mlops-proje.git
+cd mlops-proje
 
 # 2. Sanal ortam oluştur
 python -m venv venv
